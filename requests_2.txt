@@ -1,0 +1,23 @@
+таблица words
+меняю значения по полю id
+update words set voc_id = 7, word = "new" where id = 28;
+update words set word = "mysql" where LENGTH(word) > 5;
+mysql> update words set word = 'Mysql_8', voc_id = 4 where LENGTH(word) > 4; 
+
+удаление записей где id меньше 4
+delete from words where id < 4;
+
+ сортирую по полю word
+select * from words order by word;
+ если встречаются два и более одинаковые значения в колонке word, то сортирую по убыванию значения в колонке voc_id
+select * from words order by word, voc_id desc;
+ вывод 12 записей
+select word, voc_id from words order by 1, voc_id desc limit 12;
+ разделяю на группы по полю voc_id и считаю сколько id в каждой группе
+select voc_id, count(id) from words group by voc_id;
+вывожу где количество равно 4
+select voc_id, count(*) from words group by voc_id having count(*) = 4;
+ update words set voc_id = 7, word = "new" where id = 28;
+
+JOIN
+select word, title from words join vocs on(words.voc_id = vocs.id);
