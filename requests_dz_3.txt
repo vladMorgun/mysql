@@ -1,0 +1,15 @@
+films_dz_3.sql //файл с базой данных
+
+1 добавил поле год
+alter table films add column year int (5) not null default 2021;
+2 обновил поле год
+update films set year = 2019 where id > 2;
+update films set year = 2016 where id > 4;
+3 сначала подклюсаюсь джойном к таблице филм_актор и могу вывести актор_id из связывающей таблицы
+ select title, actor_id from films join film_actor on(films.id = film_actor.film_id);
+и теперь можно вывести актёров
+select films.id, title, actors.name from films right join film_actor on(films.id = film_actor.film_id) right join actors on(film_actor.actor_id = actors.id);
+4 вывожу фильмы с их режисёрами
+select (title) as films,(name) as directors from directors d join director_film df on(d.id = df.director_id) join films f on(df.film_id = f.id);
+5 вывожу films, actors, directors
+ select (title) as films,(a.name) as actors, (d.name) as directors from directors d join director_film df on(d.id = df.director_id) join films f on(df.film_id = f.id) join film_actor fa on(f.id = fa.actor_id) join actors a on(fa.actor_id = a.id);
